@@ -45,18 +45,33 @@ with io.open('twitter_feels.csv', 'w', encoding='utf8', newline='') as csvfile:
 
 # Open csv file
 with io.open('twitter_feels.csv', 'r', encoding='utf8') as csvfile:
-    # pandas reading the sentiment column
+    # pandas reading the file
     df = pd.read_csv(csvfile)
     print(df.head())
 
-    # counter counts how many times each sentiment appears
-    # counter = Counter(feels)
-    # pos = counter['positive']
-    # neg = counter['negative']
-    # neut = counter['neutral']
-
-# Plotting time
+# THE PLOTS
+# Plotting time - polarity graph
 the_graph = df.plot(x="Tweet", y="Sentiment", title="Twitter feelings for your search query")
 the_graph.set_xlabel("Tweet")
 the_graph.set_ylabel("Polarity (positive/negative)")
+plt.show()
+
+# Plotting time - pie
+pos = 0
+neu = 0
+neg = 0
+for feeling in df["Sentiment"]:
+    if feeling > 0.0:
+        pos += 1
+    elif feeling == 0.0:
+        neu += 1
+    else:
+        neg += 1
+
+labels = 'Positive', 'Negative', 'Neutral'
+sizes = [pos, neg, neu]
+colors = ['green', 'blue', 'red']
+
+plt.pie(sizes, labels=labels, colors=colors)
+plt.title("Twitter feelings for your search query")
 plt.show()
