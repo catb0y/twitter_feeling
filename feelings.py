@@ -50,6 +50,7 @@ with io.open('twitter_feels.csv', 'r', encoding='utf8') as csvfile:
     print(df.head())
 
 # THE PLOTS
+
 # Plotting time - polarity graph
 the_graph = df.plot(x="Tweet", y="Sentiment", title="Twitter feelings for your search query")
 the_graph.set_xlabel("Tweet")
@@ -60,6 +61,7 @@ plt.show()
 pos = 0
 neu = 0
 neg = 0
+
 for feeling in df["Sentiment"]:
     if feeling > 0.0:
         pos += 1
